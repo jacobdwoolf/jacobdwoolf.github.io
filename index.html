@@ -1,37 +1,135 @@
 <html>
-    <head>
-        <style>
-            div.rand-pos {
-                position: absolute;
-                left: 1000;
-                top: 500;
-            }
-        </style>
-        <script type="text/javascript">
-            function foo() {
-                alert('bar');
-            }
-            function bar() {
-                return 2000;
-            }
-        </script>
-        }
-    </head>
 
-<body style="background-color: black; background-image: url('images/ThonkSpin.gif'); background-repeat: repeat;">
-    <!--img src="ThonkSpin.gif" style="display: block; margin-left: auto; margin-right: auto; width: auto; height: 50%"/-->
-    <div style="display: none; justify-content: center;"> 
-    <img style="height: 1000px;" src="images/larson.png"/>
-    </div>
-    <div style="display: flex; justify-content: center;">
-        <img src="images/what_even_star.png"/>
-        <img src="images/done_no_succeed_star.jpg" />
-        <img src="images/attempt_star.png" />
-    </div>
+<head>
+    <style>
+        body.thonk {
+            background-color: black;
+            background-image: url('images/ThonkSpin.gif');
+            background-repeat: repeat;
+        }
     
-    <div style="display: none; justify-content: center;">
-        <img src="images/existence_pain.jpg" />
-    </div>
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-content: space-around;
+            height: 100%;
+        }
+    
+        .center {
+            width: fit-content;
+            height: fit-content;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .item {
+            margin: 5px;
+            align-self: center;
+            flex: 1 0 12%;
+        }
+    
+        img {
+            width: auto;
+        }
+    </style>
+    <script type="text/javascript">
+        var stevesArr = [];
+
+        function loadSteves() {
+            for (var i = 16; i > 0; i--) {
+                var steveObj = {
+                    'height': getRand(150, 400),
+                    'steve': 'images/steves/steve' + i + '.gif'
+                }
+                stevesArr.push(steveObj);
+            }
+            shuffleArray(stevesArr);
+        }
+
+        function sendSteves() {
+            for (var i = 0; i < stevesArr.length; i++) {
+                var steveHome = document.getElementById('steve' + (1 + i));
+                steveHome.src = stevesArr[i].steve;
+                steveHome.style.height = stevesArr[i].height;
+            }
+
+            shuffleArray(stevesArr);
+        }
+
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+
+        function getRand(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        setInterval(function(){
+            sendSteves();
+        }, getRand(2000, 5000));
+    </script>
+</head>
+
+<body class="thonk" onLoad="loadSteves();">
+    <div class="container center">
+        <div class="item">
+            <img id="steve1" src="images/steves/steve1.gif" />
+        </div>
+        <div class="item">
+            <img id="steve2" src="images/steves/steve2.gif" />
+        </div>
+        <div class="item">
+            <img id="steve3" src="images/steves/steve3.gif" />
+        </div>
+        <div class="item">
+            <img id="steve4" src="images/steves/steve4.gif" />
+        </div>
+        <div class="item">
+            <img id="steve5" src="images/steves/steve5.gif" />
+        </div>
+        <div class="item">
+            <img id="steve6" src="images/steves/steve6.gif" />
+        </div>
+        <div class="item">
+            <img id="steve7" src="images/steves/steve7.gif" />
+        </div>
+        <div class="item">
+            <img id="steve8" src="images/steves/steve8.gif" />
+        </div>
+        <div class="item">
+            <img id="steve9" src="images/steves/steve9.gif" />
+        </div>
+        <div class="item">
+            <img id="steve10" src="images/steves/steve10.gif" />
+        </div>
+        <div class="item">
+            <img id="steve11" src="images/steves/steve11.gif" />
+        </div>
+        <div class="item">
+            <img id="steve12" src="images/steves/steve12.gif" />
+        </div>
+        <div class="item">
+            <img id="steve13" src="images/steves/steve13.gif" />
+        </div>
+        <div class="item">
+            <img id="steve14" src="images/steves/steve14.gif" />
+        </div>
+        <div class="item">
+            <img id="steve15" src="images/steves/steve15.gif" />
+        </div>
+        <div class="item">
+            <img id="steve16" src="images/steves/steve16.gif" />
+        </div>       
     </div>
 </body>
 
