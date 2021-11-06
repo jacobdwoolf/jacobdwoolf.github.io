@@ -1,0 +1,251 @@
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+SC:ital,wght@0,900;1,900&family=Bubblegum+Sans&family=Happy+Monkey&family=Kavoon&family=Monoton&family=Shrikhand&family=Princess+Sofia&family=Sofia&family=Space+Mono:ital,wght@1,700&display=swap&effect=fire|fire-animation|emboss|neon|3d|3d-float|anaglyph|shadow-multiple|outline" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,900;1,900&family=Bubblegum+Sans&family=Happy+Monkey&family=Kavoon&family=Monoton&family=Shrikhand&family=Princess+Sofia&family=Sofia&family=Space+Mono:ital,wght@1,700&display=swap&effect=fire|fire-animation|emboss|neon|3d|3d-float|anaglyph|shadow-multiple|outline" rel="stylesheet">
+    <style>
+        * {
+            font-size: larger;
+        }
+
+        body {
+            background-color: #b38c8f;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-content: center;
+            width: 80%;
+            height: 75%;
+        }
+
+        .what-am-i-doing {
+            flex-grow: 1;
+        }
+
+        .debug {
+            display: none;
+        }
+
+        #input {
+            color: #364966;
+        }
+
+        .title {
+            font-family: 'Bubblegum Sans', cursive;
+            color: #fa4454;
+            font-size: 300%;
+            margin-left: -25%;
+            padding-bottom: 150px;
+        }
+
+        .input-label {
+            font-family: 'Sofia', cursive;
+            text-align: right;
+            margin-right: 15px;
+            margin-top: -100px;
+        }
+
+        input.inputbox {
+            font-family: 'Happy Monkey', cursive;
+            background-color: #fa4454;
+            color: #111823;
+            border-right: 20px double #1b48ad;
+            border-top: 0px;
+            border-bottom: 3px dotted #1b48ad;
+            text-align: center;
+        }
+
+        .btn {
+            font-family: 'Monoton', cursive;
+            font-size: 50%;
+            background-color: #042e27;
+            color: #b78460;
+            margin-left: 20px;
+            padding-left: 200px;
+            padding-top: 20px;
+        }
+
+        h1.newRank {
+            font-size: 500%;
+            font-family: 'Alegreya SC', serif;
+            text-align: right;
+            margin-top: -100px;
+            background-color: #6f022736;
+            width: fit-contents;
+        }
+
+        p.newLbl {
+            font-family: 'Kavoon', cursive;
+            color: #1b48ad;
+        }
+
+        p.broked {
+            font-family: 'Space Mono', monospace;
+            font-size: 80%;
+            color: red;
+            margin-top: -250px;
+            background-color: #000000bd;
+            border: ridge 5px #000000db;
+        }
+
+        .color-test {
+            width: 50px;
+            height: 50px;
+        }
+
+        .iron {
+            background-color: #292A2A;
+        }
+
+        .bronze {
+            background-color: #553902;
+        }
+
+        .silver {
+            background-color: #BDBFBE;
+        }
+
+        .gold {
+            background-color: #de921e;
+        }
+
+        .platinum {
+            background-color: #3498A9;
+        }
+
+        .diamasty {
+            background-color: #7D5FA5;
+        }
+
+        .gimmortal {
+            background-color: #8D163F;
+        }
+
+        .malding {
+            background-color: #121b1c;
+        }
+        }
+    </style>
+
+    <script type="text/javascript">
+        function rankUp() {
+            document.getElementById("newLbl").style.visibility = "hidden";
+            document.getElementById("broked").style.visibility = "hidden";
+            document.getElementById("newRank").style.visibility = "hidden";
+
+            var input = document.getElementById('rank').value;
+            var newRank = rankUpWithRegex(input);
+
+            if (!newRank) {
+                var errDisplay = document.getElementById('broked');
+                var oopsieWoopsie = 'OOPSIE WOOPSIE!! Uwu u make a fucky wucky!! :( A wittle fucko boingo! twy again stupey head!!1! uwU!';
+                errDisplay.innerHTML = oopsieWoopsie;
+                errDisplay.style.visibility = "unset";
+                return;
+            }
+
+            var rankColor = rankColors(newRank.split(' ')[0]);
+
+            var output = document.getElementById('newRank');
+            output.innerHTML = newRank;
+            output.style.color = rankColor;
+            output.style.visibility = "unset";
+            document.getElementById("newLbl").style.visibility = "unset";
+        }
+
+        function rankUpWithRegex(rank) {
+            try {
+                var ranks = ['iron', 'bronze', 'silver', 'gold', 'platinum', 'diamasty', 'gimmortal', 'malding simulator'];
+
+                var rankRegex = new RegExp('(' + ranks.join('|') + ')\\s?(\\d+)');
+                var curRank = rank.match(rankRegex);
+                var rankTier = curRank[1];
+                var rankLvl = parseInt(curRank[2]);
+
+                var newRankTier = rankTier;
+                var newRankLvl = rankLvl + 1;
+
+                if (newRankLvl > 3) {
+                    newRankLvl = 1;
+                    newRankTier = ranks[ranks.indexOf(rankTier) + 1];
+
+                    if (!newRankTier) {
+                        newRankTier = ranks[ranks.length - 1];
+                        newRankLvl = Math.pow(rankLvl, 2);
+                    }
+                }
+
+                return newRankTier + ' ' + newRankLvl;
+            }
+            catch (e) {
+                return false;
+            }
+        }
+
+        function rankColors(rank) {
+            var rankColors = {
+                'iron': '#292A2A',
+                'bronze': '#553902',
+                'silver': '#BDBFBE',
+                'gold': '#de921e',
+                'platinum': '#3498A9',
+                'diamasty': '#7D5FA5',
+                'gimmortal': '#8D163F',
+                'malding': '#121b1c'
+            }
+
+            return rankColors[rank];
+        }
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="what-am-i-doing">
+            <h1 class="title font-effect-fire-animation">Rank Up With Regex</h1>
+            <div id="input">
+                <form action="javascript:void(0);" id="form">
+                    <div class="input-label">
+                        <label class="input-label font-effect-shadow-multiple" for="rankInput">input ur rank bb</label>
+                    </div>
+                    <div>
+                        <input class="inputbox font-effect-anaglyph" type="text" id="rank" name="rank">
+                    </div>
+                    <input class="btn" type="submit" onclick="rankUp()" value="rankup">
+                </form>
+            </div>
+            <div id="output">
+                <label id="newLbl" for="newRank" style="visibility: hidden;">
+                    <p class="newLbl font-effect-neon">ur new rank:</p>
+                </label>
+                <h1 class="newRank font-effect-emboss" id="newRank" name="newRank" style="visibility: hidden;"></h1>
+                <p class="broked" id="broked" style="visibility: hidden;"></p>
+            </div>
+        </div>
+
+        <div class="break"></div>
+
+        <div class="debug">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="color-test iron"></td>
+                        <td class="color-test bronze"></td>
+                        <td class="color-test silver"></td>
+                        <td class="color-test gold"></td>
+                        <td class="color-test platinum"></td>
+                        <td class="color-test diamasty"></td>
+                        <td class="color-test gimmortal"></td>
+                        <td class="color-test malding"></td>
+                    </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
