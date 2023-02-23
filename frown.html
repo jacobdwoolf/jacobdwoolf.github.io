@@ -1,0 +1,162 @@
+;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Design by foolishdeveloper.com -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip A Coin</title>
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <style media="screen">
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Rubik", sans-serif;
+        }
+
+        body {
+            height: 100%;
+            background: #1f5a82;
+        }
+
+        .outer-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: auto;
+            padding: 35px;
+            top: 50%;
+            left: 50%;
+            box-shadow: 15px 30px 35px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            -webkit-perspective: 300px;
+            perspective: 300px;
+        }
+        
+        .diagram {
+            margin: 20px auto;
+        }
+
+        .diagram > div {
+            display: none;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        button {
+            width: 150px;
+            padding: 15px 0;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button.active {
+            background-color: #053469;
+            color: #ffffff;
+        }
+
+    </style>
+</head>
+
+<body onload="onLoad();">
+    <div class="outer-container">
+        <div class="container">
+            <div class="title">
+                <h1>worker lifecycle</h1>
+                <h2>current to future state</h2>
+            </div>
+            <div class="diagram">
+                <div id="frown" class="frown">
+                    <img src="images/frown/frown.gif" />
+                </div>
+                <div id="turn-it" class="turn-it">
+                    <img id="turn-it-gif" src="images/frown/turn_it.gif" />
+                </div>
+                <div id="upside-down" class="upside-down">
+                    <img src="images/frown/upside_down.png" />
+                </div>
+            </div>
+            <div class="buttons">
+                <button id="frown-button" onclick="changeState('frown');" disabled="true">
+                    current state
+                </button>
+                <button id="turn-it-button" onclick="changeState('turn-it');" disabled="true">
+                    do project
+                </button>
+                <button id="upside-down-button" onclick="changeState('upside-down');" disabled="true">
+                    future state
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--Script-->
+    <script type="text/javascript">
+        var frown = document.getElementById('frown');
+        var turnIt = document.getElementById('turn-it');
+        var upsideDown = document.getElementById('upside-down');
+        var frownButton = document.getElementById('frown-button');
+        var turnItButton = document.getElementById('turn-it-button');
+        var upsideDownButton = document.getElementById('upside-down-button');
+        var turnItGif = document.getElementById('turn-it-gif');
+
+        function onLoad() {
+            frown.style.display = 'unset';
+
+            setTimeout(function () {
+                turnItButton.removeAttribute('disabled');
+                frownButton.classList.add('active');
+            }, 3000);
+        }
+
+        function changeState(state) {
+            frown.style.display = 'none';
+            turnIt.style.display = 'none';
+            upsideDown.style.display = 'none';
+            frownButton.removeAttribute('class');
+            turnItButton.removeAttribute('class');
+            upsideDownButton.removeAttribute('class');
+            frownButton.setAttribute('disabled', true);
+            turnItButton.setAttribute('disabled', true);
+            upsideDownButton.setAttribute('disabled', true);
+
+            var showState = document.getElementById(state);
+            var stateButton = document.getElementById(state + '-button');
+            showState.style.display = 'unset';
+            stateButton.classList.add('active');
+
+            if (state == 'frown') {
+                turnItButton.removeAttribute('disabled');
+                upsideDownButton.removeAttribute('disabled');
+            }
+
+            if (state == 'turn-it') {
+                turnItGif.src = turnItGif.getAttribute('src');
+                frownButton.setAttribute('disabled', true);
+                upsideDownButton.setAttribute('disabled', true);
+
+                setTimeout(() => {
+                    changeState('upside-down');
+                }, 4000);
+            }
+
+            if (state == 'upside-down') {
+                frownButton.removeAttribute('disabled');
+                turnItButton.setAttribute('disabled', true);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
