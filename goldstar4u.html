@@ -1,33 +1,136 @@
 <html>
 
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+SC:ital,wght@0,900;1,900&family=Bubblegum+Sans&family=Happy+Monkey&family=Kavoon&family=Monoton&family=Shrikhand&family=Princess+Sofia&family=Sofia&family=Space+Mono:ital,wght@1,700&display=swap&effect=fire|fire-animation|emboss|neon|3d|3d-float|anaglyph|shadow-multiple|outline" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,900;1,900&family=Bubblegum+Sans&family=Happy+Monkey&family=Kavoon&family=Monoton&family=Shrikhand&family=Princess+Sofia&family=Sofia&family=Space+Mono:ital,wght@1,700&display=swap&effect=fire|fire-animation|emboss|neon|3d|3d-float|anaglyph|shadow-multiple|outline" rel="stylesheet">
     <style>
-        .container .outer {
-            display: flex;
-            flex-direction: row;
+        * {
+            font-size: larger;
         }
 
-        .container .inner {
-            
+        body {
+            background-color: #b38c8f;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-items: center;
+            width: 80%;
+            height: 90%;
+            margin: auto;
+            row-gap: 1rem;
+        }
+
+        .starGiver {
+            display: contents;
+        }
+
+        #input {
+            color: #364966;
+        }
+
+        .title {
+            font-family: 'Bubblegum Sans', cursive;
+            color: #fa4454;
+            font-size: 300%;
+        }
+
+        .input-label {
+            font-family: 'Sofia', cursive;
+            text-align: center;
+        }
+
+        input.inputbox {
+            font-family: 'Happy Monkey', cursive;
+            background-color: #fa4454;
+            color: #111823;
+            border-right: 20px double #1b48ad;
+            border-top: 0px;
+            border-bottom: 3px dotted #1b48ad;
+            text-align: center;
+        }
+
+        div.btn {
+            text-align: center;
+        }
+
+        button.btn {
+            background-color: navy;
+            color: white;
+            font-family: 'Happy Monkey', cursive;
+            width: auto;
+            padding: 15px;
+            border: 5px solid pink;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+
+        h1.newRank {
+            font-size: 500%;
+            font-family: 'Alegreya SC', serif;
+            text-align: right;
+            background-color: #6f022736;
+            width: fit-contents;
+        }
+
+        p.newLbl {
+            font-family: 'Kavoon', cursive;
+            color: #1b48ad;
+        }
+
+        img.starFrame {
+            border: 25px outset navy;
         }
     </style>
+
     <script type="text/javascript">
+        let starPath = 'images/stars/';
+        let starNames = ['almost.png', 'attempt.png', 'attempt_star.png', 'donenotsucceed.jpg', 'donethedo.jpg', 'done_no_succeed_star.jpg', 'foronce.jpg', 'halfassed.png', 'how.png', 'jesus.jpg', 'miserable.png', 'notry.png', 'notrybw.png', 'plsstop.png', 'suchtry.png', 'tried.jpg', 'unsure.png', 'whateven.png', 'what_even_star.png', 'why.jpg', 'wtf.jpeg'];
+        let starCount = starNames.length;
+
+        let starElem;
+        let outputElem;
+
+        function onLoad() {
+            outputElem = document.getElementById('look-at-the-star');
+            outputElem.style.visibility = 'hidden';
+            starElem = document.getElementById('starGoHere');
+        }
+
+        function getStar() {
+            console.log(starCount);
+            var chosenStar = starNames[Math.floor(Math.random() * (starCount))];
+            console.log(chosenStar);
+            starElem.src = starPath + chosenStar;
+            outputElem.style.visibility = 'unset';
+        }
     </script>
 </head>
 
-<body>
-    <div class="outer container">
-        <div class="title container">
-            <span>You did a thing! Have a gold star.</span>
-        </div>
-        <div class="button container">
-            <button class="get-star" onclick="getStar();">Get Star</button>
-        </div>
-        <div class="star container">
-            <img src="images/stars/attempt.png"/>
-        </div>
+<body onLoad="onLoad()">
+    <div class="main">
+        <div class="starGiver">
+            <div class="title font-effect-fire-animation">You did a thing!</div>
+            <div class="input-label font-effect-shadow-multiple">click to get a gold star.</div>
 
+        <div class="button btn">
+            <button class="btn" onclick="getStar();">Get Star</button>
+        </div>
     </div>
+        <div id="look-at-the-star" style="visibility: hidden;">
+            <div id="newLbl">
+                <p class="newLbl font-effect-neon">here is ur star:</p>
+            </div>
+            <div class="star container">
+                <img class="starFrame" id="starGoHere" src="" />
+            </div>
+        </div>
 </body>
 
 </html>
