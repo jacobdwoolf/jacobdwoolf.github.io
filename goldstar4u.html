@@ -96,11 +96,13 @@
 
         let starElem;
         let outputElem;
+        let btnElem;
 
         function onLoad() {
             outputElem = document.getElementById('look-at-the-star');
             outputElem.style.visibility = 'hidden';
             starElem = document.getElementById('starGoHere');
+            btnElem = document.getElementById('star-gettin-btn');
         }
 
         function getStar() {
@@ -109,6 +111,7 @@
             console.log(chosenStar);
             starElem.src = starPath + chosenStar;
             outputElem.style.visibility = 'unset';
+            btnElem.innerText = 'get another';
         }
     </script>
 </head>
@@ -120,7 +123,7 @@
             <div class="input-label font-effect-shadow-multiple">click to get a gold star.</div>
 
         <div class="button btn">
-            <button class="btn" onclick="getStar();">Get Star</button>
+            <button class="btn" id="star-gettin-btn" onclick="getStar();">Get Star</button>
         </div>
     </div>
         <div id="look-at-the-star" style="visibility: hidden;">
